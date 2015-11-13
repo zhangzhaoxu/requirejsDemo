@@ -1,17 +1,37 @@
-require.config({
-    baseUrl : './javascript',
+requirejs.config({
+    baseUrl : 'javascript/lib',
     paths:{
-        "jquery":"lib/jquery.min",
-        "underscore":"lib/underscore",
-        "math":"components/math"
+        math:'../components/math',
+        stringUtil:'../components/string',
+        dateUtil:'../components/data',
+        util:'../components/util',
+        aplugin:'../components/aplugin',
+        bplugin:'../components/bplugin'
+    },
+    shim:{
+        dateUtil:{
+            deps:[],
+            exports: 'DateUtil'
+        },
+        stringUtil:{
+            deps:[],
+            exports:'StringUtil'
+        },
+        aplugin:{
+            deps:["util"],
+            exports: 'a'
+        },
+        bplugin:{
+            deps:["util"],
+            exports: 'b'
+        }
     }
-    //shim:{
-    //    'underscore':{
-    //        exports: '_'
-    //    }
-    //}
 });
-
-require(['underscore'], function () {
-    _.each([1,2,3],alert);
+//DateUtil.toString();
+requirejs(['jquery','math','stringUtil','dateUtil','aplugin','bplugin'], function (jquery,math,StringUtil,DateUtil,ap,bp) {
+    console.log(DateUtil);
+    DateUtil.toString();
+    StringUtil.toUpperCase();
+    ap.toString();
+    bp.toString();
 });
